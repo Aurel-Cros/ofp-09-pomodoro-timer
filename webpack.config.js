@@ -8,9 +8,9 @@ const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
     entry: './src/index.js',
-    clean: true,
     output: {
         path: path.resolve(__dirname, 'dist'),
+        clean: true,
     },
     devServer: {
         open: true,
