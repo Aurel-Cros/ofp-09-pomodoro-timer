@@ -5,6 +5,8 @@ class PomoTimer {
     constructor() {
         this.frame = document.querySelector("#component");
 
+        // This references interactive elements and gets populated inside build methods.
+        this.ctrls = {};
 
         // Default values, maybe use localStorage to remember settings
         this.settings = {
@@ -37,18 +39,41 @@ class PomoTimer {
 
         const settingsDiv = make.create('div', { attributes: { class: "settings" } });
         const settingsBtn = make.create('button', { attributes: { class: "btn-settings", title: "Settings" } });
-        this.settingsBtn = settingsBtn;
         settingsDiv.appendChild(settingsBtn);
+        this.ctrls.settings = settingsBtn;
 
         header.append(title, settingsDiv);
 
         this.container.appendChild(header);
     }
     buildMain() {
+        this.main = make.create('main');
         // Timer element
+        const timer = make.create('div', { attributes: { id: "timer" } });
+        const time = make.create('p', { attributes: { id: "time" } });
+        timer.appendChild(time);
+        this.time = time;
 
         // Control elements
+        const timerType = make.create('div');
+        const focusBtn = make.create('button', { attributes: { class: "btn-timer-type" }, content: "focus" });
+        const shortBtn = make.create('button', { attributes: { class: "btn-timer-type" }, content: "short break" });
+        const longBtn = make.create('button', { attributes: { class: "btn-timer-type" }, content: "long break" });
+        timerType.append(shortBtn, focusBtn, longBtn);
+        this.ctrls.types = {
+            focus: focusBtn,
+            shortBrk: shortBtn,
+            longBrk: longBtn
+        }
 
+
+        const startBtnDiv = make.create('div');
+        const startBtn = make.create('button', { attributes: { id: "btn-start" } });
+        startBtnDiv.appendChild(startBtn);
+        this.ctrls.start = startBtn;
+
+        this.main.append(timer, timerType, startBtnDiv);
+        this.container.appendChild(this.main);
     }
     buildSettings() {
         // USE SHADOW DOM
