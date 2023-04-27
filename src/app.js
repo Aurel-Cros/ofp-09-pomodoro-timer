@@ -17,12 +17,12 @@ class PomoTimer {
             },
             autocycle: true
         };
-        buildDOM();
+        this.buildDOM();
     }
     buildDOM() {
-        buildHeader();
-        buildMain();
-        buildSettings();
+        this.buildHeader();
+        this.buildMain();
+        this.buildSettings();
     }
     buildHeader() {
         // Title, settings button
