@@ -2,3 +2,72 @@ $main-bg : #F1F6F9;
 $elem-bg : #C1C8D4;
 $main-text-blue : #26407A;
 $select-bg : rgba(0, 0, 0, 0.05);
+$btn-shadow: rgba(0, 0, 0, 0.5);
+
+:root {
+    font-size: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+#container {
+    width: min(100%, 900px);
+    margin: 0 auto;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    place-items: center;
+
+    h1 {
+        grid-column: 2;
+    }
+
+    .settings {
+        grid-column: 3;
+        justify-self: end;
+
+        button {
+            border: none;
+            border-radius: 50%;
+            box-sizing: content-box;
+            padding: 0.5rem;
+            width: 2.625rem;
+            height: 2.625rem;
+            background-color: transparent;
+            background-image: url(../assets/images/settings.svg);
+            background-size: 2.625rem;
+            background-position: 50%;
+            background-repeat: no-repeat;
+
+            &:active {
+                background-color: $select-bg;
+                box-shadow: inset 1px 1px 4px $btn-shadow;
+            }
+        }
+    }
+}
+
+main {
+    >div {
+        display: flex;
+        justify-content: center;
+    }
+
+    #btn-start {
+        border: none;
+        border-radius: 50%;
+        box-sizing: content-box;
+        padding: 0.5rem;
+        width: 2.625rem;
+        height: 2.625rem;
+        background-color: transparent;
+        background-image: url(../assets/images/start.svg);
+        background-size: 2.625rem;
+        background-position: 50%;
+        background-repeat: no-repeat;
+    }
+}
