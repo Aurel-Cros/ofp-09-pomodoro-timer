@@ -3,7 +3,8 @@ const make = new MakeElement();
 
 class PomoTimer {
     constructor() {
-        this.container = document.querySelector("#component");
+        this.frame = document.querySelector("#component");
+
 
         // Default values, maybe use localStorage to remember settings
         this.settings = {
@@ -20,12 +21,28 @@ class PomoTimer {
         this.buildDOM();
     }
     buildDOM() {
+        this.container = make.create('div', { attributes: { id: "container" } });
+        this.frame.appendChild(this.container);
+
         this.buildHeader();
         this.buildMain();
         this.buildSettings();
     }
     buildHeader() {
         // Title, settings button
+        const header = make.create('header');
+        const title = make.create('h1', { content: "Pomodoro" });
+        const subTitle = make.create('span', { content: " timer" });
+        title.appendChild(subTitle);
+
+        const settingsDiv = make.create('div', { attributes: { class: "settings" } });
+        const settingsBtn = make.create('button', { attributes: { class: "btn-settings", title: "Settings" } });
+        this.settingsBtn = settingsBtn;
+        settingsDiv.appendChild(settingsBtn);
+
+        header.append(title, settingsDiv);
+
+        this.container.appendChild(header);
     }
     buildMain() {
         // Timer element
