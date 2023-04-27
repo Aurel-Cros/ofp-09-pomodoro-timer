@@ -1,1 +1,3 @@
-console.log("Hello World!");
+import 'makeElement.js';
+import 'app.js';
+import 'scss/main.scss';
