@@ -24,6 +24,9 @@ const config = {
         new HtmlWebpackPlugin({
             template: 'src/index.html',
         }),
+        new MiniCssExtractPlugin({
+            filename: 'style.mini.css'
+        })
 
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/

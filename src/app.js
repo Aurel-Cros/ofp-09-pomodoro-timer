@@ -1,4 +1,4 @@
-import { MakeElement } from "makeElement";
+import { MakeElement } from "./makeElement";
 const make = new MakeElement();
 
 class PomoTimer {
