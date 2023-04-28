@@ -1,3 +1,3 @@
-import './makeElement.js';
-import './app.js';
-import './scss/main.scss';
+import './js/makeElement.js';
+import './js/app.js';
+import './js/scss/main.scss';

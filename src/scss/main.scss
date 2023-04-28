@@ -109,9 +109,7 @@ main {
                 clip-path: polygon(0 0, 51% 0, 51% 100%, 0 100%);
 
                 .pie {
-                    opacity: 0;
                     clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
-                    transform: rotate(10deg);
                 }
             }
 
@@ -120,7 +118,6 @@ main {
 
                 .pie {
                     clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-                    transform: rotate(150deg);
                 }
             }
 
@@ -130,7 +127,7 @@ main {
                 box-sizing: border-box;
                 border-radius: 50%;
                 border: 0.9375rem solid darkblue;
-                transition: transform 100ms linear;
+                transition: transform 1s linear;
             }
         }
 
@@ -180,4 +177,8 @@ main {
             box-shadow: inset 1px 1px 4px $btn-shadow;
         }
     }
+}
+
+.hide {
+    opacity: 0;
 }
