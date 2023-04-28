@@ -1,8 +1,10 @@
+@use "sass:math";
 $main-bg : #F1F6F9;
 $elem-bg : #C1C8D4;
 $main-text-blue : #26407A;
 $select-bg : rgba(0, 0, 0, 0.05);
 $btn-shadow: rgba(0, 0, 0, 0.5);
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Prompt&family=Rum+Raisin&family=Suravaram&display=swap');
 
 :root {
     font-size: 100%;
@@ -10,11 +12,21 @@ $btn-shadow: rgba(0, 0, 0, 0.5);
 
 body {
     margin: 0;
+    background-color: #F1F6F9;
 }
 
 #container {
     width: min(100%, 900px);
     margin: 0 auto;
+}
+
+.font-sura {
+
+    button,
+    p {
+        font-family: 'Suravaram';
+        line-height: 100%;
+    }
 }
 
 header {
@@ -24,6 +36,8 @@ header {
 
     h1 {
         grid-column: 2;
+        font-family: 'Rum Raisin', Helvetica, sans-serif;
+        font-size: 3rem;
     }
 
     .settings {
@@ -43,18 +57,107 @@ header {
             background-position: 50%;
             background-repeat: no-repeat;
 
+            transition: all 70ms ease-in-out;
+
             &:active {
                 background-color: $select-bg;
                 box-shadow: inset 1px 1px 4px $btn-shadow;
+                background-size: 2.525rem;
             }
         }
     }
 }
 
 main {
-    >div {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2.6875rem;
+
+    #timerBlock {
+        width: min(415px, 100% - 30px);
+        aspect-ratio: 1;
         display: flex;
         justify-content: center;
+        align-items: center;
+        background: #C1C8D5;
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    #timer {
+        display: block;
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+        box-sizing: border-box;
+        margin: 0.75rem;
+        background: #C1C8D5;
+        border-radius: 50%;
+
+        >div {
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            aspect-ratio: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            &.pie-left {
+                clip-path: polygon(0 0, 51% 0, 51% 100%, 0 100%);
+
+                .pie {
+                    opacity: 0;
+                    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+                    transform: rotate(10deg);
+                }
+            }
+
+            &.pie-right {
+                clip-path: polygon(50% 0, 100% 0, 100% 100%, 50.25% 100%);
+
+                .pie {
+                    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+                    transform: rotate(150deg);
+                }
+            }
+
+            .pie {
+                height: 100%;
+                width: 100%;
+                box-sizing: border-box;
+                border-radius: 50%;
+                border: 0.9375rem solid darkblue;
+                transition: transform 100ms linear;
+            }
+        }
+
+
+        >p {
+            font-size: 8rem;
+            text-align: center;
+        }
+    }
+
+    #div-timer-type {
+        border-radius: 2.1875rem;
+        background-color: $select-bg;
+
+        .btn-timer-type {
+            border: none;
+            border-radius: 2.1875rem;
+            background-color: transparent;
+            padding: 1.1875rem 1.875rem;
+
+            cursor: pointer;
+            font-size: 2rem;
+
+            &.active {
+                background-color: $select-bg;
+            }
+        }
     }
 
     #btn-start {
@@ -62,12 +165,19 @@ main {
         border-radius: 50%;
         box-sizing: content-box;
         padding: 0.5rem;
-        width: 2.625rem;
-        height: 2.625rem;
-        background-color: transparent;
+        width: 5.375rem;
+        height: 5.375rem;
+        cursor: pointer;
+        background-color: $select-bg;
         background-image: url(../assets/images/start.svg);
         background-size: 2.625rem;
-        background-position: 50%;
+        background-position: 58% 50%;
         background-repeat: no-repeat;
+        transition: all 70ms ease-in-out;
+
+        &:active {
+            background-size: 2.525rem;
+            box-shadow: inset 1px 1px 4px $btn-shadow;
+        }
     }
 }

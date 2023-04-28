@@ -23,7 +23,7 @@ class PomoTimer {
         this.buildDOM();
     }
     buildDOM() {
-        this.container = make.create('div', { attributes: { id: "container" } });
+        this.container = make.create('div', { attributes: { id: "container", class: "font-sura" } });
         this.frame.appendChild(this.container);
 
         this.buildHeader();
@@ -49,14 +49,27 @@ class PomoTimer {
     buildMain() {
         this.main = make.create('main');
         // Timer element
+        const timerBlock = make.create('div', { attributes: { id: "timerBlock" } });
         const timer = make.create('div', { attributes: { id: "timer" } });
-        const time = make.create('p', { attributes: { id: "time" } });
-        timer.appendChild(time);
+
+        const pieDivL = make.create('div', { attributes: { class: "pie-left" } });
+        const pieL = make.create('div', { attributes: { class: "pie" } });
+        pieDivL.appendChild(pieL);
+        this.pieL = pieL;
+
+        const pieDivR = make.create('div', { attributes: { class: "pie-right" } });
+        const pieR = make.create('div', { attributes: { class: "pie" } });
+        pieDivR.appendChild(pieR);
+        this.pieR = pieR;
+
+        const time = make.create('p', { attributes: { id: "time" }, content: "0:00" });
+        timer.append(pieDivL, pieDivR, time);
         this.time = time;
+        timerBlock.appendChild(timer);
 
         // Control elements
-        const timerType = make.create('div');
-        const focusBtn = make.create('button', { attributes: { class: "btn-timer-type" }, content: "focus" });
+        const timerType = make.create('div', { attributes: { id: "div-timer-type" } });
+        const focusBtn = make.create('button', { attributes: { class: "btn-timer-type active" }, content: "focus" });
         const shortBtn = make.create('button', { attributes: { class: "btn-timer-type" }, content: "short break" });
         const longBtn = make.create('button', { attributes: { class: "btn-timer-type" }, content: "long break" });
         timerType.append(shortBtn, focusBtn, longBtn);
@@ -72,7 +85,7 @@ class PomoTimer {
         startBtnDiv.appendChild(startBtn);
         this.ctrls.start = startBtn;
 
-        this.main.append(timer, timerType, startBtnDiv);
+        this.main.append(timerBlock, timerType, startBtnDiv);
         this.container.appendChild(this.main);
     }
     buildSettings() {
