@@ -60,6 +60,8 @@ class PomodoroTimer {
         DOM.time.textContent = `${mins}:${secs < 10 ? '0' + secs : secs}`;
     }
     reset() {
+        // Play sound alert
+
         // Kill timer
         clearInterval(this.timer);
 
