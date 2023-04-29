@@ -21,13 +21,14 @@ class PomodoroTimer {
             font: 'Suravaram',
             color: 'blue',
             durations: {
-                focus: 5 * 60,
-                short: 5 * 60,
-                long: 20 * 60,
-                cycles: 4
+                focus: 4,
+                short: 2,
+                long: 6,
+                cycles: 2
             },
             autocycle: true
         };
+        this.currentCycle = { stage: 0, i: 1 };
         this.setTime();
         this.refreshTime();
         this.initEvents();
@@ -38,8 +39,20 @@ class PomodoroTimer {
         })
     }
 
-    setTime() {
-        this.timeLeft = this.settings.durations.focus;
+    setTime(type = 0) {
+        // O is focus, 1 is short break, 2 is long break
+        switch (type) {
+            case 0:
+                this.timeLeft = this.settings.durations.focus;
+                break;
+            case 1:
+                this.timeLeft = this.settings.durations.short;
+                break;
+            case 2:
+                this.timeLeft = this.settings.durations.long;
+                break;
+        }
+        console.log("Setting type", type, ":", this.timeLeft + "s");
     }
     refreshTime() {
         const mins = Math.trunc(this.timeLeft / 60);
@@ -48,14 +61,45 @@ class PomodoroTimer {
     }
     reset() {
         clearInterval(this.timer);
-        this.setTime();
-        this.refreshTime();
 
         DOM.pieL.style = `transform: rotate(0deg);`
         setTimeout(() => {
             DOM.pieL.classList.add('hide');
             DOM.pieR.style = `transform: rotate(0deg);`
-        }, 1000);
+        }, 500);
+        setTimeout(() => {
+            if (this.settings.autocycle) {
+                switch (this.currentCycle.stage) {
+                    case 0:
+                        this.currentCycle.stage++;
+                        this.setTime(this.currentCycle.stage);
+                        break;
+                    case 1:
+                        if (this.currentCycle.i == this.settings.durations.cycles) {
+                            this.currentCycle.stage++;
+                        }
+                        else {
+                            this.currentCycle.stage--;
+                            this.currentCycle.i++;
+                        }
+                        this.setTime(this.currentCycle.stage);
+                        break;
+                    case 2:
+                        this.currentCycle.stage = 0;
+                        break;
+                }
+                if (this.currentCycle.stage <= 2)
+                    this.play();
+                else {
+                    this.currentCycle.i = 1;
+                    this.currentCycle.stage = 0;
+                }
+            }
+            else {
+                this.setTime();
+            }
+            this.refreshTime();
+        }, 1250);
     }
 
     play() {
@@ -83,7 +127,7 @@ class PomodoroTimer {
                 DOM.pieR.style = `transform: rotate(180deg);`;
                 setTimeout(() => {
                     DOM.pieL.classList.remove('hide');
-                }, 1000);
+                }, 500);
             }
             DOM.pieL.style = `transform: rotate(${overHalf == 2 ? 180 : newDeg % 180}deg);`;
         }
