@@ -35,6 +35,7 @@ class PomodoroTimer {
     }
     initEvents() {
         this.ctrls.start.addEventListener("click", () => {
+            console.log("Clicked play");
             this.play();
         })
     }
@@ -52,7 +53,6 @@ class PomodoroTimer {
                 this.timeLeft = this.settings.durations.long;
                 break;
         }
-        console.log("Setting type", type, ":", this.timeLeft + "s");
     }
     refreshTime() {
         const mins = Math.trunc(this.timeLeft / 60);
@@ -60,50 +60,53 @@ class PomodoroTimer {
         DOM.time.textContent = `${mins}:${secs < 10 ? '0' + secs : secs}`;
     }
     reset() {
+        // Kill timer
         clearInterval(this.timer);
 
+        // Reset animation - left side rotates back, then right side rotates back
         DOM.pieL.style = `transform: rotate(0deg);`
         setTimeout(() => {
             DOM.pieL.classList.add('hide');
             DOM.pieR.style = `transform: rotate(0deg);`
         }, 500);
-        setTimeout(() => {
-            if (this.settings.autocycle) {
-                switch (this.currentCycle.stage) {
-                    case 0:
-                        this.currentCycle.stage++;
-                        this.setTime(this.currentCycle.stage);
-                        break;
-                    case 1:
-                        if (this.currentCycle.i == this.settings.durations.cycles) {
-                            this.currentCycle.stage++;
-                        }
-                        else {
-                            this.currentCycle.stage--;
-                            this.currentCycle.i++;
-                        }
-                        this.setTime(this.currentCycle.stage);
-                        break;
-                    case 2:
-                        this.currentCycle.stage = 0;
-                        break;
-                }
-                if (this.currentCycle.stage <= 2)
-                    this.play();
-                else {
-                    this.currentCycle.i = 1;
-                    this.currentCycle.stage = 0;
-                }
-            }
-            else {
-                this.setTime();
-            }
+
+        // After reset, is autocycle is enabled, start the next stage
+        let replay = true;
+
+        if (!this.settings.autocycle) {
+            this.setTime();
             this.refreshTime();
-        }, 1250);
+            return;
+        }
+        if (this.currentCycle.stage == 0) {
+            // If previous cycle was a focus period, go to a break
+            // If this is the 4th cycle, go to a longer break
+            if (this.currentCycle.i < 4)
+                this.currentCycle.stage = 1;
+            else
+                this.currentCycle.stage = 2;
+        }
+        else {
+            // Stop the timer after a long break
+            if (this.currentCycle.stage == 2)
+                replay = false;
+
+            // Previous cycle was a break, go back to a focus period
+            this.currentCycle.stage = 0;
+        }
+        this.currentCycle.i++;
+        this.setTime(this.currentCycle.stage);
+        this.refreshTime();
+
+        setTimeout(() => {
+            if (replay) {
+                console.log("Play in logic.");
+                this.play();
+            }
+        }, 1001);
     }
 
     play() {
-        console.log("Clicked play");
         this.timer = setInterval(() => {
             this.timeLeft--;
             if (this.timeLeft < 0) {
@@ -118,7 +121,9 @@ class PomodoroTimer {
     }
 
     doRotation() {
-        const ratio = this.timeLeft / this.settings.durations.focus;
+        const maxTime = this.currentCycle.stage == 0 ? this.settings.durations.focus :
+            (this.currentCycle.stage == 1 ? this.settings.durations.short : this.settings.durations.long);
+        const ratio = this.timeLeft / maxTime;
         const newDeg = 360 * (1 - ratio);
         const overHalf = Math.trunc(newDeg / 180);
 
