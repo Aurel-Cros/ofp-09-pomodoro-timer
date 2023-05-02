@@ -48,7 +48,7 @@ class PomodoroTimer {
 
         // In case of a manual type switch, we abort a potential current automatic cycle and reset to a starting position
         this.ctrls.types.div.addEventListener("click", (e) => {
-            // If the click is on the container but not a button, nothing happens
+            // If the click is on the container but not a button, nothing
             if (e.target === this.ctrls.types.div) {
                 return
             }
