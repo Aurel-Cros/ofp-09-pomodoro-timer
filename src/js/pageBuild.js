@@ -52,11 +52,11 @@ class PageBuild {
 
         // Control elements
         const timerType = make.create('div', { attributes: { id: "div-timer-type" } });
+        this.timerTypeDiv = timerType;
         this.focusBtn = make.create('button', { attributes: { class: "btn-timer-type active" }, content: "focus" });
         this.shortBtn = make.create('button', { attributes: { class: "btn-timer-type" }, content: "short break" });
         this.longBtn = make.create('button', { attributes: { class: "btn-timer-type" }, content: "long break" });
         timerType.append(this.shortBtn, this.focusBtn, this.longBtn);
-
 
         const startBtnDiv = make.create('div');
         this.startBtn = make.create('button', { attributes: { id: "btn-start" } });

@@ -9,9 +9,10 @@ class PomodoroTimer {
         this.ctrls = {
             settingsOpen: DOM.settingsBtn,
             types: {
+                div: DOM.timerTypeDiv,
                 focus: DOM.focusBtn,
-                shortBrk: DOM.shortBtn,
-                longBrk: DOM.longBtn
+                short: DOM.shortBtn,
+                long: DOM.longBtn
             },
             start: DOM.startBtn
         };
@@ -43,6 +44,42 @@ class PomodoroTimer {
                 console.log("Clicked pause.");
                 this.pause();
             }
+        })
+
+        // In case of a manual type switch, we abort a potential current automatic cycle and reset to a starting position
+        this.ctrls.types.div.addEventListener("click", (e) => {
+            // If the click is on the container but not a button, nothing happens
+            if (e.target === this.ctrls.types.div) {
+                return
+            }
+
+            const buffer = this.settings.autocycle;
+            this.settings.autocycle = false;
+            this.reset();
+
+            switch (e.target) {
+                case this.ctrls.types.focus:
+                    e.target.classList.add('active');
+                    this.ctrls.types.short.classList.remove('active');
+                    this.ctrls.types.long.classList.remove('active');
+
+                    this.setTime(0);
+                    break;
+                case this.ctrls.types.short:
+                    e.target.classList.add('active');
+                    this.ctrls.types.focus.classList.remove('active');
+                    this.ctrls.types.long.classList.remove('active');
+                    this.setTime(1);
+                    break;
+                case this.ctrls.types.long:
+                    e.target.classList.add('active');
+                    this.ctrls.types.short.classList.remove('active');
+                    this.ctrls.types.focus.classList.remove('active');
+                    this.setTime(2);
+                    break;
+            }
+            this.refreshTime();
+            this.settings.autocycle = buffer;
         })
     }
 
@@ -81,6 +118,8 @@ class PomodoroTimer {
 
 
         if (!this.settings.autocycle) {
+            this.currentCycle.stage = 0;
+            this.currentCycle.i = 1;
             this.setTime();
             this.refreshTime();
             return;

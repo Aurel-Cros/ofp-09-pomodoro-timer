@@ -45,6 +45,7 @@ header {
         justify-self: end;
 
         button {
+            cursor: pointer;
             border: none;
             border-radius: 50%;
             box-sizing: content-box;
@@ -145,20 +146,29 @@ main {
         .btn-timer-type {
             border: none;
             border-radius: 2.1875rem;
-            background-color: transparent;
+            background-image: linear-gradient(to top, $select-bg, $select-bg);
+            background-size: 0% 0%;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
             padding: 1.1875rem 1.875rem;
 
             cursor: pointer;
             font-size: 2rem;
 
+            transition: all 250ms ease-in-out;
+
             &.active {
-                background-color: $select-bg;
+                background-size: 100% 100%;
+            }
+
+            &:hover {
+                background-color: transparent;
             }
         }
     }
 
     #btn-start {
-        border: none;
+        border: 1px solid transparent;
         border-radius: 50%;
         box-sizing: content-box;
         padding: 0.5rem;
@@ -170,11 +180,15 @@ main {
         background-size: 2.625rem;
         background-position: 58% 50%;
         background-repeat: no-repeat;
-        transition: all 70ms ease-in-out;
+        transition: all 70ms ease-in-out, border-color 200ms;
 
         &:active {
             background-size: 2.525rem;
             box-shadow: inset 1px 1px 4px $btn-shadow;
+        }
+
+        &:hover {
+            border: 1px solid $btn-shadow;
         }
 
         &.pause {
