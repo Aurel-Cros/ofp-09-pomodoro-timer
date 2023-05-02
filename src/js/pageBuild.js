@@ -77,14 +77,14 @@ class PageBuild {
         // Font section
         const fontTitle = make.create('h3', { content: "Font" });
 
-        const fontFamilyBlock = make.create('div', { attributes: { class: "font-family" } });
+        this.fontFamilyBlock = make.create('div', { attributes: { class: "font-family" } });
         const fontFamilyP = make.create('p', { content: "Family :" });
-        const font1 = make.create('button', { content: "aA", attributes: { class: "active" } });
-        const font2 = make.create('button', { content: "aA" });
-        const font3 = make.create('button', { content: "aA" });
-        fontFamilyBlock.append(fontFamilyP, font1, font2, font3);
+        this.font1 = make.create('button', { content: "aA", attributes: { title: "Suravaram", class: "active", 'data-font': 'sura' } });
+        this.font2 = make.create('button', { content: "aA", attributes: { title: "Prompt", 'data-font': 'prompt' } });
+        this.font3 = make.create('button', { content: "aA", attributes: { title: "Bruno Ace", 'data-font': 'bruno' } });
+        this.fontFamilyBlock.append(fontFamilyP, this.font1, this.font2, this.font3);
 
-        const fontColourBlock = make.create('div', { attributes: { class: "font-colour" } });
+        this.fontColorBlock = make.create('div', { attributes: { class: "font-colour" } });
         const fontColourP = make.create('p', { content: "Colour :" });
         const colour1 = make.create('button', { attributes: { class: "active" } });
         colour1.appendChild(make.create('span'));
@@ -92,10 +92,10 @@ class PageBuild {
         colour2.appendChild(make.create('span'));
         const colour3 = make.create('button');
         colour3.appendChild(make.create('span'));
-        fontColourBlock.append(fontColourP, colour1, colour2, colour3);
+        this.fontColorBlock.append(fontColourP, colour1, colour2, colour3);
 
         const fontSection = make.create('div');
-        fontSection.append(fontTitle, fontFamilyBlock, fontColourBlock);
+        fontSection.append(fontTitle, this.fontFamilyBlock, this.fontColorBlock);
 
         this.settingsWindow.appendChild(fontSection);
 
@@ -120,6 +120,17 @@ class PageBuild {
         this.frame.append(this.settingsWindow);
     }
 }
+
+class SettingsPanel extends HTMLElement {
+    constructor() {
+        super();
+        this.build();
+        this.shadow = this.attachShadow({ mode: "open" });
+    }
+    build() {
+    }
+}
+
 class Slider {
     constructor(options) {
         this.name = options.name;
@@ -154,4 +165,5 @@ class Slider {
         this.block = div;
     }
 }
+
 export { PageBuild };

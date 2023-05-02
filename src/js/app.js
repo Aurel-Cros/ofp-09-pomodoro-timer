@@ -7,7 +7,14 @@ class PomodoroTimer {
     constructor() {
         // This references interactive elements
         this.ctrls = {
-            settingsOpen: DOM.settingsBtn,
+            settings: {
+                open: DOM.settingsBtn,
+                close: DOM.close,
+                font: {
+                    family: DOM.fontFamilyBlock,
+                    color: DOM.fontColorBlock,
+                }
+            },
             types: {
                 div: DOM.timerTypeDiv,
                 focus: DOM.focusBtn,
@@ -35,6 +42,23 @@ class PomodoroTimer {
         this.initEvents();
     }
     initEvents() {
+        this.ctrls.settings.open.addEventListener("click", () => {
+            // Open settings panel
+
+        })
+        this.ctrls.settings.close.addEventListener("click", () => {
+            // Close settings panel
+        })
+        this.ctrls.settings.font.family.addEventListener("click", (e) => {
+            DOM.font1.classList.remove('active');
+            DOM.font2.classList.remove('active');
+            DOM.font3.classList.remove('active');
+            e.target.classList.add('active');
+
+            this.settings.font = e.target.title;
+            DOM.main.className = `font-${e.target.dataset.font}`;
+        })
+
         this.ctrls.start.addEventListener("click", () => {
             if (!this.timer) {
                 console.log("Clicked play.");
