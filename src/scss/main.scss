@@ -176,6 +176,11 @@ main {
             background-size: 2.525rem;
             box-shadow: inset 1px 1px 4px $btn-shadow;
         }
+
+        &.pause {
+            background-image: url(../assets/images/pause.svg);
+            background-position: 50% 50%;
+        }
     }
 }
 

@@ -35,8 +35,14 @@ class PomodoroTimer {
     }
     initEvents() {
         this.ctrls.start.addEventListener("click", () => {
-            console.log("Clicked play");
-            this.play();
+            if (!this.timer) {
+                console.log("Clicked play.");
+                this.play();
+            }
+            else {
+                console.log("Clicked pause.");
+                this.pause();
+            }
         })
     }
 
@@ -64,6 +70,7 @@ class PomodoroTimer {
 
         // Kill timer
         clearInterval(this.timer);
+        this.timer = false;
 
         // Reset animation - left side rotates back, then right side rotates back
         DOM.pieL.style = `transform: rotate(0deg);`
@@ -72,14 +79,15 @@ class PomodoroTimer {
             DOM.pieR.style = `transform: rotate(0deg);`
         }, 500);
 
-        // After reset, is autocycle is enabled, start the next stage
-        let replay = true;
 
         if (!this.settings.autocycle) {
             this.setTime();
             this.refreshTime();
             return;
         }
+        // After reset, is autocycle is enabled, start the next stage
+        let replay = true;
+
         if (this.currentCycle.stage == 0) {
             // If previous cycle was a focus period, go to a break
             // If this is the 4th cycle, go to a longer break
@@ -90,8 +98,10 @@ class PomodoroTimer {
         }
         else {
             // Stop the timer after a long break
-            if (this.currentCycle.stage == 2)
+            if (this.currentCycle.stage == 2) {
                 replay = false;
+                console.log("Full cycle complete.");
+            }
 
             // Previous cycle was a break, go back to a focus period
             this.currentCycle.stage = 0;
@@ -100,15 +110,16 @@ class PomodoroTimer {
         this.setTime(this.currentCycle.stage);
         this.refreshTime();
 
-        setTimeout(() => {
-            if (replay) {
+        if (replay) {
+            setTimeout(() => {
                 console.log("Play in logic.");
                 this.play();
-            }
-        }, 1001);
+            }, 1001);
+        }
     }
 
     play() {
+        this.ctrls.start.classList.add('pause');
         this.timer = setInterval(() => {
             this.timeLeft--;
             if (this.timeLeft < 0) {
@@ -120,6 +131,11 @@ class PomodoroTimer {
             }
 
         }, 1000)
+    }
+    pause() {
+        clearInterval(this.timer);
+        this.timer = false;
+        this.ctrls.start.classList.remove('pause');
     }
 
     doRotation() {
