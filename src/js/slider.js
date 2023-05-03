@@ -1,10 +1,14 @@
+import { MakeElement } from "./makeElement";
+const make = new MakeElement();
+
+
 class Slider {
     constructor(options) {
         this.name = options.name;
         this.min = options.range.min;
         this.max = options.range.max;
         this.step = options.step;
-        this.value = options.defaultValue;
+        this.type = options.type || "time";
 
         this.build();
     }
@@ -21,14 +25,23 @@ class Slider {
             }
         });
 
-        const sliderName = make.create('p', { content: this.name });
-        const displayValue = String(Math.trunc(this.value / 60)) + ' mins ' + String(this.value % 60 || '');
-        const sliderDuration = make.create('p', { content: displayValue });
+        const sliderName = make.create('p', { content: `${this.name} :` });
+        const sliderDuration = make.create('p');
         const sliderNameAndDuration = make.create('div');
         sliderNameAndDuration.append(sliderName, sliderDuration);
 
         div.append(sliderNameAndDuration, input);
         this.block = div;
+        this.slider = input;
+        this.display = sliderDuration;
+        this.updateDisplay(this.value);
+    }
+
+    updateDisplay(value, updateValue = false) {
+        if (updateValue)
+            this.value = value;
+        const displayValue = this.type == 'time' ? (String(Math.trunc(this.value / 60)) + ' mins') : this.value;
+        this.display.textContent = displayValue;
     }
 }
 
