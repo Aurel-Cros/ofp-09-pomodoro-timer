@@ -1,3 +1,10 @@
+$main-text-blue : #26407A;
+$main-text-blue-50 : rgba(38, 65, 122, 0.5);
+$main-text-red: rgb(192, 14, 14);
+$main-text-red-50: rgba(190, 14, 14, 0.5);
+$main-text-green : rgb(67, 155, 26);
+$main-text-green-50 : rgba(67, 155, 26, 0.5);
+
 .font-sura {
 
     button,
@@ -26,5 +33,155 @@
         font-stretch: condensed;
         line-height: 100%;
         font-size-adjust: 0.39;
+    }
+}
+
+.theme-red {
+
+    h1,
+    h2,
+    h3,
+    p,
+    button,
+    label {
+        color: $main-text-red;
+    }
+
+    .settingsWindow {
+        >div:last-of-type {
+            border-color: $main-text-red-50;
+        }
+
+        .slider {
+            input {
+                background-color: $main-text-red;
+
+                &::-moz-range-thumb {
+                    border-color: $main-text-red;
+                }
+
+                &::-webkit-slider-thumb {
+                    border-color: $main-text-red;
+                }
+            }
+        }
+
+        .auto-cycle-label {
+            input {
+                &:checked~div::after {
+                    color: $main-text-red;
+                }
+            }
+
+            >div {
+                border-color: $main-text-red;
+            }
+        }
+    }
+
+    #btn-start,
+    .settings-close-btn,
+    .btn-settings {
+        filter: invert(11%) sepia(85%) saturate(4664%) hue-rotate(353deg) brightness(99%) contrast(102%);
+    }
+}
+
+.theme-green {
+
+    h1,
+    h2,
+    h3,
+    p,
+    button,
+    label {
+        color: $main-text-green;
+    }
+
+    .settingsWindow {
+        >div:last-of-type {
+            border-color: $main-text-green-50;
+        }
+
+        .slider {
+            input {
+                background-color: $main-text-green;
+
+                &::-moz-range-thumb {
+                    border-color: $main-text-green;
+                }
+
+                &::-webkit-slider-thumb {
+                    border-color: $main-text-green;
+                }
+            }
+        }
+
+        .auto-cycle-label {
+            input {
+                &:checked~div::after {
+                    color: $main-text-green;
+                }
+            }
+
+            >div {
+                border-color: $main-text-green;
+            }
+        }
+    }
+
+    #btn-start,
+    .settings-close-btn,
+    .btn-settings {
+        filter: invert(48%) sepia(69%) saturate(1704%) hue-rotate(66deg) brightness(89%) contrast(80%);
+    }
+}
+
+.theme-blue {
+
+    h1,
+    h2,
+    h3,
+    p,
+    button,
+    label {
+        color: $main-text-blue;
+    }
+
+    .settingsWindow {
+        >div:last-of-type {
+            border-color: $main-text-blue-50;
+        }
+
+        .slider {
+            input {
+                background-color: $main-text-blue;
+
+                &::-moz-range-thumb {
+                    border-color: $main-text-blue;
+                }
+
+                &::-webkit-slider-thumb {
+                    border-color: $main-text-blue;
+                }
+            }
+        }
+
+        .auto-cycle-label {
+            input {
+                &:checked~div::after {
+                    color: $main-text-blue;
+                }
+            }
+
+            >div {
+                border-color: $main-text-blue;
+            }
+        }
+    }
+
+    #btn-start,
+    .settings-close-btn,
+    .btn-settings {
+        filter: invert(21%) sepia(63%) saturate(800%) hue-rotate(187deg) brightness(95%) contrast(95%);
     }
 }

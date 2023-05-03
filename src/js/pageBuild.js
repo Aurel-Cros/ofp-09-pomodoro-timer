@@ -10,6 +10,8 @@ class PageBuild {
         this.container = make.create('div', { attributes: { id: "container", class: "font-sura" } });
         this.frame.appendChild(this.container);
 
+        this.frame.className = 'theme-blue';
+
         this.buildHeader();
         this.buildMain();
         this.buildSettings();
