@@ -1,23 +1,23 @@
 import { PageBuild } from "./pageBuild";
 const DOM = new PageBuild();
 
-class PomodoroTimer {
+export class PomodoroTimer {
     constructor() {
         // This references interactive elements
         this.ctrls = {
             settings: {
                 open: DOM.settingsBtn,
-                close: DOM.close,
+                close: DOM.settingsPanel.close,
                 font: {
-                    family: DOM.fontFamilyBlock,
-                    color: DOM.fontColorBlock,
+                    family: DOM.settingsPanel.fontFamilyBlock,
+                    color: DOM.settingsPanel.fontColorBlock,
                 },
-                autocycle: DOM.autoCycle,
+                autocycle: DOM.settingsPanel.autoCycle,
                 sliders: {
-                    focus: DOM.focusSlider,
-                    short: DOM.shortSlider,
-                    long: DOM.longSlider,
-                    cycles: DOM.cyclesSlider
+                    focus: DOM.settingsPanel.focusSlider,
+                    short: DOM.settingsPanel.shortSlider,
+                    long: DOM.settingsPanel.longSlider,
+                    cycles: DOM.settingsPanel.cyclesSlider
                 }
             },
             displayedType: 0,
@@ -54,33 +54,33 @@ class PomodoroTimer {
         DOM.frame.className = `theme-${this.settings.color}`;
         DOM.main.className = `font-${this.settings.font}`;
 
-        DOM.font1.classList.remove('active');
-        DOM.font2.classList.remove('active');
-        DOM.font3.classList.remove('active');
+        DOM.settingsPanel.font1.classList.remove('active');
+        DOM.settingsPanel.font2.classList.remove('active');
+        DOM.settingsPanel.font3.classList.remove('active');
         switch (this.settings.font) {
             case 'sura':
-                DOM.font1.classList.add('active');
+                DOM.settingsPanel.font1.classList.add('active');
                 break;
             case 'prompt':
-                DOM.font2.classList.add('active');
+                DOM.settingsPanel.font2.classList.add('active');
                 break;
             case 'bruno':
-                DOM.font3.classList.add('active');
+                DOM.settingsPanel.font3.classList.add('active');
                 break;
         }
 
-        DOM.colour1.classList.remove('active');
-        DOM.colour2.classList.remove('active');
-        DOM.colour3.classList.remove('active');
+        DOM.settingsPanel.colour1.classList.remove('active');
+        DOM.settingsPanel.colour2.classList.remove('active');
+        DOM.settingsPanel.colour3.classList.remove('active');
         switch (this.settings.color) {
             case 'blue':
-                DOM.colour1.classList.add('active');
+                DOM.settingsPanel.colour1.classList.add('active');
                 break;
             case 'red':
-                DOM.colour2.classList.add('active');
+                DOM.settingsPanel.colour2.classList.add('active');
                 break;
             case 'green':
-                DOM.colour3.classList.add('active');
+                DOM.settingsPanel.colour3.classList.add('active');
                 break;
         }
     }
@@ -98,18 +98,19 @@ class PomodoroTimer {
         })
         this.ctrls.settings.open.addEventListener("click", () => {
             // Open settings panel
-
+            DOM.displaySettings();
         })
         this.ctrls.settings.close.addEventListener("click", () => {
             // Close settings panel
+            DOM.closeSettings();
         })
 
         this.ctrls.settings.font.family.addEventListener("click", (e) => {
             if (!e.target.title)
                 return;
-            DOM.font1.classList.remove('active');
-            DOM.font2.classList.remove('active');
-            DOM.font3.classList.remove('active');
+            DOM.settingsPanel.font1.classList.remove('active');
+            DOM.settingsPanel.font2.classList.remove('active');
+            DOM.settingsPanel.font3.classList.remove('active');
             e.target.classList.add('active');
 
             this.settings.font = e.target.dataset.font;
@@ -118,9 +119,9 @@ class PomodoroTimer {
         this.ctrls.settings.font.color.addEventListener("click", (e) => {
             if (!e.target.title)
                 return;
-            DOM.colour1.classList.remove('active');
-            DOM.colour2.classList.remove('active');
-            DOM.colour3.classList.remove('active');
+            DOM.settingsPanel.colour1.classList.remove('active');
+            DOM.settingsPanel.colour2.classList.remove('active');
+            DOM.settingsPanel.colour3.classList.remove('active');
             e.target.classList.add('active');
 
             this.settings.color = String(e.target.title).toLowerCase();
@@ -322,8 +323,6 @@ class PomodoroTimer {
         const newDeg = 360 * (1 - ratio);
         const overHalf = Math.trunc(newDeg / 180);
 
-        console.log(this.timeLeft, maxTime);
-
         if (overHalf) {
             if (newDeg == 180) {
                 DOM.pieR.style = `transform: rotate(180deg);`;
@@ -345,5 +344,3 @@ class PomodoroTimer {
         alert.play();
     }
 }
-
-export { PomodoroTimer };

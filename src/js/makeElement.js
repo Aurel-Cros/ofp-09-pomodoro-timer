@@ -18,7 +18,7 @@ const newDiv = create('div', {
     content: "This is a div"
 })
 */
-class MakeElement {
+export class MakeElement {
     create(tagName, options = {}) {
         this.options = options;
         this.element = document.createElement(tagName);
@@ -37,4 +37,3 @@ class MakeElement {
         }
     }
 }
-export { MakeElement };

@@ -2,8 +2,9 @@ import { MakeElement } from "./makeElement";
 import { Slider } from './slider';
 const make = new MakeElement();
 
-class PageBuild {
+export class PageBuild {
     constructor() {
+        customElements.define("settings-panel", SettingsPanel);
         this.frame = document.querySelector("#component");
         this.buildDOM();
     }
@@ -76,14 +77,32 @@ class PageBuild {
         this.container.appendChild(this.main);
     }
     buildSettings() {
+        this.settingsPanel = make.create('settings-panel');
+    }
+    displaySettings() {
+        this.container.appendChild(this.settingsPanel.panel);
+    }
+    closeSettings() {
+        this.container.removeChild(this.settingsPanel.panel);
+    }
+}
+
+export class SettingsPanel extends HTMLElement {
+    constructor() {
+        super();
+        this.shadow = this.attachShadow({ mode: "open" });
+        this.build();
+    }
+    build() {
         // USE SHADOW DOM
-        this.settingsWindow = make.create('div', { attributes: { class: "settingsWindow" } });
+        this.panel = make.create('div', { attributes: { class: "settingsWindow" } });
+        this.shadow.appendChild(this.panel);
         // Title and close button
         const settingsHeader = make.create('div', { attributes: { class: "settings-header" } });
         const title = make.create('h2', { content: "Settings" });
         this.close = make.create('button', { attributes: { class: "settings-close-btn" } });
         settingsHeader.append(title, this.close);
-        this.settingsWindow.appendChild(settingsHeader);
+        this.panel.appendChild(settingsHeader);
         // Font section
         const fontTitle = make.create('h3', { content: "Font" });
 
@@ -107,7 +126,7 @@ class PageBuild {
         const fontSection = make.create('div');
         fontSection.append(fontTitle, this.fontFamilyBlock, this.fontColorBlock);
 
-        this.settingsWindow.appendChild(fontSection);
+        this.panel.appendChild(fontSection);
 
         // Duration section
         const durationTitle = make.create('h3', { content: "Durations" });
@@ -119,26 +138,12 @@ class PageBuild {
 
         const durationSection = make.create('div');
         durationSection.append(durationTitle, this.focusSlider.block, this.shortSlider.block, this.longSlider.block, this.cyclesSlider.block);
-        this.settingsWindow.appendChild(durationSection);
+        this.panel.appendChild(durationSection);
 
         const autoCycleBlock = make.create('label', { content: "Automatic cycling :", attributes: { class: "auto-cycle-label" } });
         this.autoCycle = make.create('input', { attributes: { type: "checkbox" } });
 
         autoCycleBlock.append(this.autoCycle, make.create('div'));
         durationSection.appendChild(autoCycleBlock);
-
-        this.frame.append(this.settingsWindow);
     }
 }
-
-class SettingsPanel extends HTMLElement {
-    constructor() {
-        super();
-        this.build();
-        this.shadow = this.attachShadow({ mode: "open" });
-    }
-    build() {
-    }
-}
-
-export { PageBuild };

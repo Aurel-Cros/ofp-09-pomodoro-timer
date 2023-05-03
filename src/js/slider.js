@@ -2,7 +2,7 @@ import { MakeElement } from "./makeElement";
 const make = new MakeElement();
 
 
-class Slider {
+export class Slider {
     constructor(options) {
         this.name = options.name;
         this.min = options.range.min;
@@ -46,5 +46,3 @@ class Slider {
         this.display.textContent = displayValue;
     }
 }
-
-export { Slider };
