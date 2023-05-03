@@ -284,7 +284,7 @@ export class PomodoroTimer {
         }
         this.currentCycle.i++;
         this.setTime(this.currentCycle.stage);
-        this.ctrls.displayedType = this.currentCycle.stage;
+        this.setDisplayType(this.currentCycle.stage);
         this.refreshTime();
 
         if (replay) {
