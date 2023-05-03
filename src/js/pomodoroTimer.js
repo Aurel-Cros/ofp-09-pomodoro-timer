@@ -49,11 +49,11 @@ class PomodoroTimer {
         this.initSliders();
     }
     initSliders() {
-
         this.ctrls.settings.sliders.long.updateDisplay(this.settings.durations.long, true);
         this.ctrls.settings.sliders.focus.updateDisplay(this.settings.durations.focus, true);
         this.ctrls.settings.sliders.short.updateDisplay(this.settings.durations.short, true);
         this.ctrls.settings.sliders.cycles.updateDisplay(this.settings.durations.cycles, true);
+        this.ctrls.settings.autocycle.checked = this.settings.autocycle;
     }
     initEvents() {
         this.ctrls.settings.open.addEventListener("click", () => {
@@ -113,6 +113,9 @@ class PomodoroTimer {
         this.ctrls.settings.sliders.cycles.slider.addEventListener("input", (e) => {
             this.ctrls.settings.sliders.cycles.updateDisplay(e.target.value, true);
             this.settings.durations.cycles = e.target.value;
+        })
+        this.ctrls.settings.autocycle.addEventListener("click", (e) => {
+            this.settings.autocycle = e.target.checked;
         })
 
         this.ctrls.start.addEventListener("click", () => {
