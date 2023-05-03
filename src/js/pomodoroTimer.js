@@ -30,9 +30,9 @@ class PomodoroTimer {
             start: DOM.startBtn
         };
 
-        // Default values, maybe use localStorage to remember settings
-        this.settings = {
-            font: 'Suravaram',
+        // Default values
+        this.settings = JSON.parse(localStorage.getItem('settings')) || {
+            font: 'sura',
             color: 'blue',
             durations: {
                 focus: 1500,
@@ -42,11 +42,47 @@ class PomodoroTimer {
             },
             autocycle: true
         };
+        this.initTheme();
+
         this.currentCycle = { stage: 0, i: 1 };
         this.setTime();
         this.refreshTime();
         this.initEvents();
         this.initSliders();
+    }
+    initTheme() {
+        DOM.frame.className = `theme-${this.settings.color}`;
+        DOM.main.className = `font-${this.settings.font}`;
+
+        DOM.font1.classList.remove('active');
+        DOM.font2.classList.remove('active');
+        DOM.font3.classList.remove('active');
+        switch (this.settings.font) {
+            case 'sura':
+                DOM.font1.classList.add('active');
+                break;
+            case 'prompt':
+                DOM.font2.classList.add('active');
+                break;
+            case 'bruno':
+                DOM.font3.classList.add('active');
+                break;
+        }
+
+        DOM.colour1.classList.remove('active');
+        DOM.colour2.classList.remove('active');
+        DOM.colour3.classList.remove('active');
+        switch (this.settings.color) {
+            case 'blue':
+                DOM.colour1.classList.add('active');
+                break;
+            case 'red':
+                DOM.colour2.classList.add('active');
+                break;
+            case 'green':
+                DOM.colour3.classList.add('active');
+                break;
+        }
     }
     initSliders() {
         this.ctrls.settings.sliders.long.updateDisplay(this.settings.durations.long, true);
@@ -56,6 +92,10 @@ class PomodoroTimer {
         this.ctrls.settings.autocycle.checked = this.settings.autocycle;
     }
     initEvents() {
+        window.addEventListener("beforeunload", () => {
+            const settings = JSON.stringify(this.settings);
+            localStorage.setItem('settings', settings);
+        })
         this.ctrls.settings.open.addEventListener("click", () => {
             // Open settings panel
 
@@ -72,8 +112,8 @@ class PomodoroTimer {
             DOM.font3.classList.remove('active');
             e.target.classList.add('active');
 
-            this.settings.font = e.target.title;
-            DOM.main.className = `font-${e.target.dataset.font}`;
+            this.settings.font = e.target.dataset.font;
+            this.initTheme();
         })
         this.ctrls.settings.font.color.addEventListener("click", (e) => {
             if (!e.target.title)
@@ -84,7 +124,7 @@ class PomodoroTimer {
             e.target.classList.add('active');
 
             this.settings.color = String(e.target.title).toLowerCase();
-            DOM.frame.className = `theme-${this.settings.color}`;
+            this.initTheme();
         })
 
         this.ctrls.settings.sliders.focus.slider.addEventListener("input", (e) => {

@@ -21,6 +21,166 @@ body {
     margin: 0 auto;
 }
 
+header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    place-items: center;
+
+    h1 {
+        grid-column: 2;
+        font-family: 'Rum Raisin', Helvetica, sans-serif;
+        font-size: 3rem;
+    }
+
+    .settings {
+        grid-column: 3;
+        justify-self: end;
+
+        button {
+            cursor: pointer;
+            border-radius: 50%;
+            box-sizing: content-box;
+            padding: 0.5rem;
+            width: 2.625rem;
+            height: 2.625rem;
+            background-color: transparent;
+            background-image: url(../assets/images/settings.svg);
+            background-size: 2.625rem;
+            background-position: 50%;
+            background-repeat: no-repeat;
+
+            &:active {
+                background-color: $select-bg;
+                box-shadow: inset 1px 1px 4px $btn-shadow, -2px -2px 4px $btn-shadow;
+                background-size: 2.525rem;
+            }
+        }
+    }
+}
+
+main {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2.6875rem;
+
+    #timerBlock {
+        width: min(415px, 100% - 30px);
+        aspect-ratio: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #C1C8D5;
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    #timer {
+        display: block;
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+        box-sizing: border-box;
+        margin: 0.75rem;
+        background: #C1C8D5;
+        border-radius: 50%;
+
+        >div {
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            aspect-ratio: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            &.pie-left {
+                clip-path: polygon(0 0, 51% 0, 51% 100%, 0 100%);
+
+                .pie {
+                    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+                }
+            }
+
+            &.pie-right {
+                clip-path: polygon(50% 0, 100% 0, 100% 100%, 50.25% 100%);
+
+                .pie {
+                    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+                }
+            }
+
+            .pie {
+                height: 100%;
+                width: 100%;
+                box-sizing: border-box;
+                border-radius: 50%;
+                border: 0.9375rem solid darkblue;
+                transition: transform 0.5s linear;
+            }
+        }
+
+
+        >p {
+            font-size: 8rem;
+            text-align: center;
+        }
+    }
+
+    #div-timer-type {
+        border-radius: 2.1875rem;
+        background-color: $select-bg;
+
+        .btn-timer-type {
+            border: none;
+            border-radius: 2.1875rem;
+            background-image: linear-gradient(to top, $select-bg, $select-bg);
+            background-size: 0% 0%;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            padding: 1.1875rem 1.875rem;
+
+            cursor: pointer;
+            font-size: 2rem;
+
+            transition: all 250ms ease-in-out;
+
+            &.active {
+                background-size: 100% 100%;
+            }
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+
+    #btn-start {
+        border-radius: 50%;
+        box-sizing: content-box;
+        padding: 0.5rem;
+        width: 5.375rem;
+        height: 5.375rem;
+        cursor: pointer;
+        background-color: $select-bg;
+        background-image: url(../assets/images/start.svg);
+        background-size: 2.625rem;
+        background-position: 58% 50%;
+        background-repeat: no-repeat;
+
+        &:active {
+            background-size: 2.525rem;
+            box-shadow: inset 1px 1px 4px $btn-shadow;
+        }
+
+        &.pause {
+            background-image: url(../assets/images/pause.svg);
+            background-position: 50% 50%;
+        }
+    }
+}
+
 .settingsWindow {
     position: absolute;
     right: 0;
@@ -63,10 +223,8 @@ body {
         height: 1.5rem;
         width: 1.5rem;
         background: url('../assets/images/close.svg') 50% / 1.5rem no-repeat;
-        border: none;
         border-radius: 50%;
         cursor: pointer;
-        transition: all 70ms ease-in-out;
 
         &:active {
             background-color: $select-bg;
@@ -93,7 +251,6 @@ body {
             width: 3rem;
             height: 3rem;
             background: transparent;
-            border: 1px solid transparent;
             border-radius: 50%;
 
             span {
@@ -219,172 +376,12 @@ body {
     }
 }
 
-header {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    place-items: center;
+button {
+    border: 1px solid transparent;
+    transition: all 70ms ease-in-out, border-color 200ms;
 
-    h1 {
-        grid-column: 2;
-        font-family: 'Rum Raisin', Helvetica, sans-serif;
-        font-size: 3rem;
-    }
-
-    .settings {
-        grid-column: 3;
-        justify-self: end;
-
-        button {
-            cursor: pointer;
-            border: none;
-            border-radius: 50%;
-            box-sizing: content-box;
-            padding: 0.5rem;
-            width: 2.625rem;
-            height: 2.625rem;
-            background-color: transparent;
-            background-image: url(../assets/images/settings.svg);
-            background-size: 2.625rem;
-            background-position: 50%;
-            background-repeat: no-repeat;
-
-            transition: all 70ms ease-in-out;
-
-            &:active {
-                background-color: $select-bg;
-                box-shadow: inset 1px 1px 4px $btn-shadow, -2px -2px 4px $btn-shadow;
-                background-size: 2.525rem;
-            }
-        }
-    }
-}
-
-main {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    gap: 2.6875rem;
-
-    #timerBlock {
-        width: min(415px, 100% - 30px);
-        aspect-ratio: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #C1C8D5;
-        border-radius: 50%;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-    }
-
-    #timer {
-        display: block;
-        position: relative;
-        width: 100%;
-        aspect-ratio: 1;
-        box-sizing: border-box;
-        margin: 0.75rem;
-        background: #C1C8D5;
-        border-radius: 50%;
-
-        >div {
-            height: 100%;
-            width: 100%;
-            box-sizing: border-box;
-            aspect-ratio: 1;
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            &.pie-left {
-                clip-path: polygon(0 0, 51% 0, 51% 100%, 0 100%);
-
-                .pie {
-                    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
-                }
-            }
-
-            &.pie-right {
-                clip-path: polygon(50% 0, 100% 0, 100% 100%, 50.25% 100%);
-
-                .pie {
-                    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-                }
-            }
-
-            .pie {
-                height: 100%;
-                width: 100%;
-                box-sizing: border-box;
-                border-radius: 50%;
-                border: 0.9375rem solid darkblue;
-                transition: transform 0.5s linear;
-            }
-        }
-
-
-        >p {
-            font-size: 8rem;
-            text-align: center;
-        }
-    }
-
-    #div-timer-type {
-        border-radius: 2.1875rem;
-        background-color: $select-bg;
-
-        .btn-timer-type {
-            border: none;
-            border-radius: 2.1875rem;
-            background-image: linear-gradient(to top, $select-bg, $select-bg);
-            background-size: 0% 0%;
-            background-position: 50% 50%;
-            background-repeat: no-repeat;
-            padding: 1.1875rem 1.875rem;
-
-            cursor: pointer;
-            font-size: 2rem;
-
-            transition: all 250ms ease-in-out;
-
-            &.active {
-                background-size: 100% 100%;
-            }
-
-            &:hover {
-                background-color: transparent;
-            }
-        }
-    }
-
-    #btn-start {
-        border: 1px solid transparent;
-        border-radius: 50%;
-        box-sizing: content-box;
-        padding: 0.5rem;
-        width: 5.375rem;
-        height: 5.375rem;
-        cursor: pointer;
-        background-color: $select-bg;
-        background-image: url(../assets/images/start.svg);
-        background-size: 2.625rem;
-        background-position: 58% 50%;
-        background-repeat: no-repeat;
-        transition: all 70ms ease-in-out, border-color 200ms;
-
-        &:active {
-            background-size: 2.525rem;
-            box-shadow: inset 1px 1px 4px $btn-shadow;
-        }
-
-        &:hover {
-            border: 1px solid $btn-shadow;
-        }
-
-        &.pause {
-            background-image: url(../assets/images/pause.svg);
-            background-position: 50% 50%;
-        }
+    &:hover {
+        border-color: $btn-shadow;
     }
 }
 

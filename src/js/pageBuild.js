@@ -89,14 +89,14 @@ class PageBuild {
 
         this.fontFamilyBlock = make.create('div', { attributes: { class: "font-family" } });
         const fontFamilyP = make.create('p', { content: "Family :" });
-        this.font1 = make.create('button', { content: "aA", attributes: { title: "Suravaram", class: "active", 'data-font': 'sura' } });
+        this.font1 = make.create('button', { content: "aA", attributes: { title: "Suravaram", 'data-font': 'sura' } });
         this.font2 = make.create('button', { content: "aA", attributes: { title: "Prompt", 'data-font': 'prompt' } });
         this.font3 = make.create('button', { content: "aA", attributes: { title: "Bruno Ace", 'data-font': 'bruno' } });
         this.fontFamilyBlock.append(fontFamilyP, this.font1, this.font2, this.font3);
 
         this.fontColorBlock = make.create('div', { attributes: { class: "font-colour" } });
         const fontColourP = make.create('p', { content: "Colour :" });
-        this.colour1 = make.create('button', { attributes: { title: "Blue", class: "active" } });
+        this.colour1 = make.create('button', { attributes: { title: "Blue" } });
         this.colour1.appendChild(make.create('span'));
         this.colour2 = make.create('button', { attributes: { title: "Red" } });
         this.colour2.appendChild(make.create('span'));
