@@ -37,9 +37,11 @@ class Slider {
         this.updateDisplay(this.value);
     }
 
-    updateDisplay(value, updateValue = false) {
-        if (updateValue)
+    updateDisplay(value, updateValue = true) {
+        if (updateValue) {
             this.value = value;
+            this.slider.value = value;
+        }
         const displayValue = this.type == 'time' ? (String(Math.trunc(this.value / 60)) + ' mins') : this.value;
         this.display.textContent = displayValue;
     }

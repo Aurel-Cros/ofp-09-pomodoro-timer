@@ -85,10 +85,10 @@ class PomodoroTimer {
         }
     }
     initSliders() {
-        this.ctrls.settings.sliders.long.updateDisplay(this.settings.durations.long, true);
-        this.ctrls.settings.sliders.focus.updateDisplay(this.settings.durations.focus, true);
-        this.ctrls.settings.sliders.short.updateDisplay(this.settings.durations.short, true);
-        this.ctrls.settings.sliders.cycles.updateDisplay(this.settings.durations.cycles, true);
+        this.ctrls.settings.sliders.long.updateDisplay(this.settings.durations.long);
+        this.ctrls.settings.sliders.focus.updateDisplay(this.settings.durations.focus);
+        this.ctrls.settings.sliders.short.updateDisplay(this.settings.durations.short);
+        this.ctrls.settings.sliders.cycles.updateDisplay(this.settings.durations.cycles);
         this.ctrls.settings.autocycle.checked = this.settings.autocycle;
     }
     initEvents() {
