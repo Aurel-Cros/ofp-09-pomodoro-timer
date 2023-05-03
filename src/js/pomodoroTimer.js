@@ -194,7 +194,7 @@ class PomodoroTimer {
     refreshTime() {
         const mins = Math.trunc(this.timeLeft / 60);
         const secs = this.timeLeft % 60;
-        DOM.time.textContent = `${mins}:${secs < 10 ? '0' + secs : secs}`;
+        DOM.time.textContent = `${mins < 10 ? '0' + mins : mins}:${secs < 10 ? '0' + secs : secs}`;
     }
     reset() {
         // Play sound alert
