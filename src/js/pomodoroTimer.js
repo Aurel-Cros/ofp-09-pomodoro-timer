@@ -36,7 +36,7 @@ class PomodoroTimer {
             color: 'blue',
             durations: {
                 focus: 1500,
-                short: 300,
+                short: 6,
                 long: 1200,
                 cycles: 4
             },
@@ -135,8 +135,8 @@ class PomodoroTimer {
                 return
             }
 
-            const buffer = this.settings.autocycle;
             this.settings.autocycle = false;
+            this.ctrls.settings.autocycle.checked = false;
             this.reset();
 
             switch (e.target) {
@@ -151,23 +151,22 @@ class PomodoroTimer {
                     break;
             }
             this.refreshTime();
-            this.settings.autocycle = buffer;
         })
     }
     setDisplayType(type) {
         switch (type) {
             case 0:
-                e.target.classList.add('active');
+                this.ctrls.types.focus.classList.add('active');
                 this.ctrls.types.short.classList.remove('active');
                 this.ctrls.types.long.classList.remove('active');
                 break;
             case 1:
-                e.target.classList.add('active');
+                this.ctrls.types.short.classList.add('active');
                 this.ctrls.types.focus.classList.remove('active');
                 this.ctrls.types.long.classList.remove('active');
                 break;
             case 2:
-                e.target.classList.add('active');
+                this.ctrls.types.long.classList.add('active');
                 this.ctrls.types.short.classList.remove('active');
                 this.ctrls.types.focus.classList.remove('active');
                 break;
@@ -255,6 +254,7 @@ class PomodoroTimer {
         this.timer = setInterval(() => {
             this.timeLeft--;
             if (this.timeLeft < 0) {
+                this.alert();
                 this.reset();
             }
             else {
@@ -290,6 +290,11 @@ class PomodoroTimer {
             DOM.pieR.style = `transform: rotate(${newDeg % 180}deg);`;
         }
 
+    }
+
+    alert() {
+        console.log("Sound ?");
+        new Audio('../assets/audio/alert.mp3').play();
     }
 }
 
