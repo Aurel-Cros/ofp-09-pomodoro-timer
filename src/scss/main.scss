@@ -1,9 +1,8 @@
 $main-bg : #F1F6F9;
 $elem-bg : #C1C8D4;
-$main-text-blue : #26407A;
-$main-text-red: #C00E0E;
-$main-text-green : #439B1A;
-$main-text-blue-50 : rgba(38, 65, 122, 0.5);
+$main-text-blue : rgb(37, 64, 121);
+$main-text-red: rgb(158, 21, 21);
+$main-text-green : rgb(64, 121, 37);
 $select-bg : rgba(0, 0, 0, 0.05);
 $btn-shadow: rgba(0, 0, 0, 0.5);
 @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Oswald&family=Prompt&family=Rum+Raisin&family=Suravaram&display=swap');
@@ -98,6 +97,7 @@ body {
             border-radius: 50%;
 
             span {
+                pointer-events: none;
                 padding: 0.425rem 0.925rem;
                 line-height: 1rem;
                 border-radius: 0.75rem;
@@ -136,7 +136,7 @@ body {
 
     >div:last-of-type {
         margin-top: 3rem;
-        border-top: 4px solid $main-text-blue-50;
+        border-top: 4px solid;
     }
 
     .slider {

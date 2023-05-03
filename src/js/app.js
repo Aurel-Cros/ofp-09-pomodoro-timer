@@ -50,6 +50,8 @@ class PomodoroTimer {
             // Close settings panel
         })
         this.ctrls.settings.font.family.addEventListener("click", (e) => {
+            if (!e.target.title)
+                return;
             DOM.font1.classList.remove('active');
             DOM.font2.classList.remove('active');
             DOM.font3.classList.remove('active');
@@ -57,6 +59,17 @@ class PomodoroTimer {
 
             this.settings.font = e.target.title;
             DOM.main.className = `font-${e.target.dataset.font}`;
+        })
+        this.ctrls.settings.font.color.addEventListener("click", (e) => {
+            if (!e.target.title)
+                return;
+            DOM.colour1.classList.remove('active');
+            DOM.colour2.classList.remove('active');
+            DOM.colour3.classList.remove('active');
+            e.target.classList.add('active');
+
+            this.settings.color = String(e.target.title).toLowerCase();
+            DOM.frame.className = `theme-${this.settings.color}`;
         })
 
         this.ctrls.start.addEventListener("click", () => {

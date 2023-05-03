@@ -88,13 +88,13 @@ class PageBuild {
 
         this.fontColorBlock = make.create('div', { attributes: { class: "font-colour" } });
         const fontColourP = make.create('p', { content: "Colour :" });
-        const colour1 = make.create('button', { attributes: { class: "active" } });
-        colour1.appendChild(make.create('span'));
-        const colour2 = make.create('button');
-        colour2.appendChild(make.create('span'));
-        const colour3 = make.create('button');
-        colour3.appendChild(make.create('span'));
-        this.fontColorBlock.append(fontColourP, colour1, colour2, colour3);
+        this.colour1 = make.create('button', { attributes: { title: "Blue", class: "active" } });
+        this.colour1.appendChild(make.create('span'));
+        this.colour2 = make.create('button', { attributes: { title: "Red" } });
+        this.colour2.appendChild(make.create('span'));
+        this.colour3 = make.create('button', { attributes: { title: "Green" } });
+        this.colour3.appendChild(make.create('span'));
+        this.fontColorBlock.append(fontColourP, this.colour1, this.colour2, this.colour3);
 
         const fontSection = make.create('div');
         fontSection.append(fontTitle, this.fontFamilyBlock, this.fontColorBlock);

@@ -1,9 +1,9 @@
-$main-text-blue : #26407A;
+$main-text-blue : rgb(37, 64, 121);
 $main-text-blue-50 : rgba(38, 65, 122, 0.5);
-$main-text-red: rgb(192, 14, 14);
-$main-text-red-50: rgba(190, 14, 14, 0.5);
-$main-text-green : rgb(67, 155, 26);
-$main-text-green-50 : rgba(67, 155, 26, 0.5);
+$main-text-red: rgb(158, 21, 21);
+$main-text-red-50: hsla(0, 53%, 31%, 0.5);
+$main-text-green : rgb(64, 121, 37);
+$main-text-green-50 : hsla(101, 53%, 31%, 0.5);
 
 .font-sura {
 
@@ -47,6 +47,10 @@ $main-text-green-50 : rgba(67, 155, 26, 0.5);
         color: $main-text-red;
     }
 
+    main #timer>div .pie {
+        border-color: $main-text-red;
+    }
+
     .settingsWindow {
         >div:last-of-type {
             border-color: $main-text-red-50;
@@ -82,7 +86,7 @@ $main-text-green-50 : rgba(67, 155, 26, 0.5);
     #btn-start,
     .settings-close-btn,
     .btn-settings {
-        filter: invert(11%) sepia(85%) saturate(4664%) hue-rotate(353deg) brightness(99%) contrast(102%);
+        filter: invert(15%) sepia(42%) saturate(4543%) hue-rotate(344deg) brightness(106%) contrast(106%);
     }
 }
 
@@ -95,6 +99,10 @@ $main-text-green-50 : rgba(67, 155, 26, 0.5);
     button,
     label {
         color: $main-text-green;
+    }
+
+    main #timer>div .pie {
+        border-color: $main-text-green;
     }
 
     .settingsWindow {
@@ -132,7 +140,7 @@ $main-text-green-50 : rgba(67, 155, 26, 0.5);
     #btn-start,
     .settings-close-btn,
     .btn-settings {
-        filter: invert(48%) sepia(69%) saturate(1704%) hue-rotate(66deg) brightness(89%) contrast(80%);
+        filter: invert(35%) sepia(66%) saturate(503%) hue-rotate(57deg) brightness(96%) contrast(86%);
     }
 }
 
@@ -145,6 +153,10 @@ $main-text-green-50 : rgba(67, 155, 26, 0.5);
     button,
     label {
         color: $main-text-blue;
+    }
+
+    main #timer>div .pie {
+        border-color: $main-text-blue;
     }
 
     .settingsWindow {
