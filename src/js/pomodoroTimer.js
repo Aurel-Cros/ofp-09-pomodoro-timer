@@ -141,19 +141,22 @@ class PomodoroTimer {
 
             switch (e.target) {
                 case this.ctrls.types.focus:
+                    this.currentCycle.stage = 0;
                     this.setDisplayType(0);
                     break;
                 case this.ctrls.types.short:
+                    this.currentCycle.stage = 1;
                     this.setDisplayType(1);
                     break;
                 case this.ctrls.types.long:
+                    this.currentCycle.stage = 2;
                     this.setDisplayType(2);
                     break;
             }
             this.refreshTime();
         })
     }
-    setDisplayType(type) {
+    setDisplayType(type = this.currentCycle.stage) {
         switch (type) {
             case 0:
                 this.ctrls.types.focus.classList.add('active');
@@ -209,8 +212,10 @@ class PomodoroTimer {
 
 
         if (!this.settings.autocycle) {
+            this.ctrls.start.classList.remove('pause');
             this.currentCycle.stage = 0;
             this.currentCycle.i = 1;
+            this.setDisplayType();
             this.setTime();
             this.refreshTime();
             return;
@@ -277,6 +282,8 @@ class PomodoroTimer {
         const newDeg = 360 * (1 - ratio);
         const overHalf = Math.trunc(newDeg / 180);
 
+        console.log(this.timeLeft, maxTime);
+
         if (overHalf) {
             if (newDeg == 180) {
                 DOM.pieR.style = `transform: rotate(180deg);`;
@@ -293,8 +300,9 @@ class PomodoroTimer {
     }
 
     alert() {
-        console.log("Sound ?");
-        new Audio('../assets/audio/alert.mp3').play();
+        const alert = new Audio('../assets/audio/alert.mp3');
+        alert.volume = 0.5;
+        alert.play();
     }
 }
 
