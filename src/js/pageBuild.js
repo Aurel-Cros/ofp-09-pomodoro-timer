@@ -12,6 +12,13 @@ class PageBuild {
 
         this.frame.className = 'theme-blue';
 
+        this.defaultTimes = {
+            focus: 1500,
+            short: 300,
+            long: 1200,
+            cycles: 4
+        }
+
         this.buildHeader();
         this.buildMain();
         this.buildSettings();
@@ -104,10 +111,10 @@ class PageBuild {
         // Duration section
         const durationTitle = make.create('h3', { content: "Durations" });
 
-        this.focusSlider = new Slider({ name: "Focus", range: { min: 600, max: 3600 }, step: 30, defaultValue: 1500 });
-        this.shortSlider = new Slider({ name: "Short break", range: { min: 60, max: 600 }, step: 30, defaultValue: 300 });
-        this.longSlider = new Slider({ name: "Long break", range: { min: 300, max: 1800 }, step: 30, defaultValue: 1200 });
-        this.cyclesSlider = new Slider({ name: "Cycles", type: "plain", range: { min: 1, max: 10 }, step: 1, defaultValue: 4 });
+        this.focusSlider = new Slider({ name: "Focus", range: { min: 600, max: 3600 }, step: 60 });
+        this.shortSlider = new Slider({ name: "Short break", range: { min: 60, max: 600 }, step: 60 });
+        this.longSlider = new Slider({ name: "Long break", range: { min: 300, max: 1800 }, step: 60 });
+        this.cyclesSlider = new Slider({ name: "Cycles", type: "plain", range: { min: 1, max: 10 }, step: 1 });
 
         const durationSection = make.create('div');
         durationSection.append(durationTitle, this.focusSlider.block, this.shortSlider.block, this.longSlider.block, this.cyclesSlider.block);
@@ -139,7 +146,6 @@ class Slider {
         this.min = options.range.min;
         this.max = options.range.max;
         this.step = options.step;
-        this.value = options.defaultValue;
         this.type = options.type || "time";
 
         this.build();
@@ -158,13 +164,22 @@ class Slider {
         });
 
         const sliderName = make.create('p', { content: `${this.name} :` });
-        const displayValue = this.type == 'time' ? (String(Math.trunc(this.value / 60)) + ' mins ' + String(this.value % 60 || '')) : this.value;
-        const sliderDuration = make.create('p', { content: displayValue });
+        const sliderDuration = make.create('p');
         const sliderNameAndDuration = make.create('div');
         sliderNameAndDuration.append(sliderName, sliderDuration);
 
         div.append(sliderNameAndDuration, input);
         this.block = div;
+        this.slider = input;
+        this.display = sliderDuration;
+        this.updateDisplay(this.value);
+    }
+
+    updateDisplay(value, updateValue = false) {
+        if (updateValue)
+            this.value = value;
+        const displayValue = this.type == 'time' ? (String(Math.trunc(this.value / 60)) + ' mins') : this.value;
+        this.display.textContent = displayValue;
     }
 }
 
