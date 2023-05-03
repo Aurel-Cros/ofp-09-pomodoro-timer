@@ -36,7 +36,7 @@ class PomodoroTimer {
             color: 'blue',
             durations: {
                 focus: 1500,
-                short: 6,
+                short: 300,
                 long: 1200,
                 cycles: 4
             },
