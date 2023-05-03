@@ -17,16 +17,17 @@ body {
 }
 
 #container {
-    width: min(100%, 900px);
-    margin: 0 auto;
+    padding: 1.875rem 3.125rem;
 }
 
 header {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     place-items: center;
+    margin-bottom: 2.125rem;
 
     h1 {
+        margin: 0;
         grid-column: 2;
         font-family: 'Rum Raisin', Helvetica, sans-serif;
         font-size: 3rem;
@@ -117,7 +118,7 @@ main {
                 box-sizing: border-box;
                 border-radius: 50%;
                 border: 0.9375rem solid darkblue;
-                transition: transform 0.5s linear;
+                transition: transform 0.999s linear;
             }
         }
 
@@ -186,12 +187,12 @@ main {
     right: 0;
     top: 0;
     z-index: 1;
+    height: 100%;
     background-color: $main-bg;
     padding: 1rem;
     box-sizing: border-box;
     width: min(320px, 100%);
     border: 1px solid $elem-bg;
-    border-bottom-left-radius: 1rem;
     font: 400 1.5rem 'Oswald';
 
     .settings-header {
@@ -380,7 +381,8 @@ button {
     border: 1px solid transparent;
     transition: all 70ms ease-in-out, border-color 200ms;
 
-    &:hover {
+    &:hover,
+    &:active {
         border-color: $btn-shadow;
     }
 }
