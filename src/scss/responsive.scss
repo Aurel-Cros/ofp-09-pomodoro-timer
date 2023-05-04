@@ -26,6 +26,13 @@
 }
 
 @media screen and (max-width: 500px) {
+    .settingsWindow {
+        width: 100%;
+        p {
+            font-size: 1.25rem
+        }
+    }
+
     #timer #time {
         font-size: min(7rem, 21vw);
     }
