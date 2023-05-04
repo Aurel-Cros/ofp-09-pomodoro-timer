@@ -1,0 +1,32 @@
+@media screen and (max-width: 730px) {
+    #container {
+        padding: 0.5rem;
+    }
+
+    header {
+        grid-template-columns: 1fr auto;
+
+        h1 {
+            grid-column: 1;
+
+            span {
+                display: none;
+            }
+        }
+
+        .settings button.btn-settings {
+            background-image: url(../assets/images/burger.svg);
+        }
+    }
+
+    #div-timer-type {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #timer #time {
+        font-size: min(7rem, 21vw);
+    }
+}
