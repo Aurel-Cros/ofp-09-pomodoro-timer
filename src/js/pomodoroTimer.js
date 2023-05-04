@@ -51,7 +51,7 @@ export class PomodoroTimer {
         this.initSliders();
     }
     initTheme() {
-        DOM.frame.className = `theme-${this.settings.color}`;
+        DOM.container.className = `theme-${this.settings.color}`;
         DOM.main.className = `font-${this.settings.font}`;
 
         DOM.settingsPanel.font1.classList.remove('active');

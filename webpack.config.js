@@ -1,13 +1,13 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
-    entry: './src/index.js',
+    context: path.resolve(__dirname, 'src'),
+    entry: './index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         clean: true,
@@ -18,12 +18,9 @@ const config = {
         static: {
             directory: path.join(__dirname, 'dist'),
         },
-        // watchFiles: ['dist/*']
+        watchFiles: ['dist/**']
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: 'src/index.html',
-        }),
         new MiniCssExtractPlugin({
             filename: 'style.mini.css'
         })
@@ -38,12 +35,29 @@ const config = {
                 loader: 'babel-loader',
             },
             {
-                test: /\.s[ac]ss$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                test: /index\.html/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'index.html'
+                }
             },
             {
-                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-                type: 'asset',
+                test: /\.(svg|png|jpg|gif|ttf|woff|woff2)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: '[name][ext]'
+                }
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.css$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: '[name][ext]'
+                }
             },
             {
                 test: /\.mp3$/,
@@ -62,10 +76,6 @@ const config = {
 module.exports = () => {
     if (isProduction) {
         config.mode = 'production';
-
-        config.plugins.push(new MiniCssExtractPlugin());
-
-
     } else {
         config.mode = 'development';
     }

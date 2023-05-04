@@ -4,15 +4,19 @@ const make = new MakeElement();
 
 export class PageBuild {
     constructor() {
-        customElements.define("settings-panel", SettingsPanel);
         this.frame = document.querySelector("#component");
         this.buildDOM();
     }
     buildDOM() {
         this.container = make.create('div', { attributes: { id: "container", class: "font-sura" } });
-        this.frame.appendChild(this.container);
 
-        this.frame.className = 'theme-blue';
+        this.shadow = this.frame.attachShadow({ mode: 'open' });
+        const link = make.create('link', { attributes: { href: "style.mini.css", rel: "stylesheet" } });
+        this.shadow.appendChild(link);
+        this.shadow.appendChild(this.container);
+
+
+        this.shadow.className = 'theme-blue';
 
         this.defaultTimes = {
             focus: 1500,
@@ -77,7 +81,7 @@ export class PageBuild {
         this.container.appendChild(this.main);
     }
     buildSettings() {
-        this.settingsPanel = make.create('settings-panel');
+        this.settingsPanel = new SettingsPanel();
     }
     displaySettings() {
         this.container.appendChild(this.settingsPanel.panel);
@@ -87,16 +91,12 @@ export class PageBuild {
     }
 }
 
-export class SettingsPanel extends HTMLElement {
+export class SettingsPanel {
     constructor() {
-        super();
-        this.shadow = this.attachShadow({ mode: "open" });
         this.build();
     }
     build() {
-        // USE SHADOW DOM
         this.panel = make.create('div', { attributes: { class: "settingsWindow" } });
-        this.shadow.appendChild(this.panel);
         // Title and close button
         const settingsHeader = make.create('div', { attributes: { class: "settings-header" } });
         const title = make.create('h2', { content: "Settings" });
