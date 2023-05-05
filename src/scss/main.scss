@@ -61,7 +61,7 @@ main {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: min(500px, 100% - 30px);
+        width: min(350px, 100% - 30px);
         aspect-ratio: 1;
         background: $elem-bg;
         border-radius: 50%;
@@ -116,7 +116,7 @@ main {
         >p {
             width: 80%;
             box-sizing: border-box;
-            font-size: 7rem;
+            font-size: 5.5rem;
             text-align: center;
         }
     }
@@ -136,7 +136,7 @@ main {
             padding: 1.1875rem 1.875rem;
 
             cursor: pointer;
-            font-size: 2rem;
+            font-size: 1.5rem;
 
             transition: all 250ms ease-in-out;
 
@@ -154,12 +154,12 @@ main {
         border-radius: 50%;
         box-sizing: content-box;
         padding: 0.5rem;
-        width: 5.375rem;
-        height: 5.375rem;
+        width: 4rem;
+        aspect-ratio: 1;
         cursor: pointer;
         background-color: $select-bg;
         background-image: url(../assets/images/start.svg);
-        background-size: 2.625rem;
+        background-size: 2rem;
         background-position: 58% 50%;
         background-repeat: no-repeat;
 
