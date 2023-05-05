@@ -8,22 +8,14 @@ export class PageBuild {
         this.buildDOM();
     }
     buildDOM() {
-        this.container = make.create('div', { attributes: { id: "container", class: "font-sura" } });
+        // Main container for component
+        this.container = make.create('div', { attributes: { id: "container" } });
 
+        // Shadow DOM creation / link for its stylesheet
         this.shadow = this.frame.attachShadow({ mode: 'open' });
         const link = make.create('link', { attributes: { href: "style.mini.css", rel: "stylesheet" } });
         this.shadow.appendChild(link);
         this.shadow.appendChild(this.container);
-
-
-        this.shadow.className = 'theme-blue';
-
-        this.defaultTimes = {
-            focus: 1500,
-            short: 300,
-            long: 1200,
-            cycles: 4
-        }
 
         this.buildHeader();
         this.buildMain();
@@ -91,7 +83,7 @@ export class PageBuild {
     }
 }
 
-export class SettingsPanel {
+class SettingsPanel {
     constructor() {
         this.build();
     }

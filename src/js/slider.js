@@ -1,7 +1,6 @@
 import { MakeElement } from "./makeElement";
 const make = new MakeElement();
 
-
 export class Slider {
     constructor(options) {
         this.name = options.name;
