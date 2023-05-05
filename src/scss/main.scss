@@ -1,8 +1,8 @@
-$main-bg : #f9f8f7;
+$main-bg : #f9f3ed;
 $elem-bg : #fff9f3;
-$main-text-blue : #254079;
-$main-text-red: rgb(158, 21, 21);
-$main-text-green : rgb(64, 121, 37);
+$main-text-blue : rgb(37, 64, 121);
+$main-text-red: rgb(223, 81, 81);
+$main-text-green : rgb(59, 115, 33);
 $select-bg : rgba(0, 0, 0, 0.05);
 $btn-shadow: rgba(0, 0, 0, 0.5);
 
@@ -180,7 +180,7 @@ main {
     right: 0;
     top: 0;
     z-index: 1;
-    height: 100%;
+    min-height: 100%;
     background-color: $elem-bg;
     padding: 1rem;
     box-sizing: border-box;
@@ -208,6 +208,7 @@ main {
         text-align: center;
         letter-spacing: 0.015em;
         text-transform: uppercase;
+        opacity: 0.9;
     }
 
     .settings-close-btn {
@@ -238,6 +239,7 @@ main {
             flex-grow: 1;
             letter-spacing: 0.015em;
             margin: 0.75rem;
+            opacity: 0.8;
         }
 
         button {
@@ -272,6 +274,7 @@ main {
     .font-family {
         button {
             font: 400 1.3125rem 'Prompt';
+            opacity: 0.75;
 
             &:first-of-type {
                 font-family: 'Suravaram';
@@ -299,6 +302,7 @@ main {
 
             p {
                 margin: 0;
+                opacity: 0.8;
             }
         }
 
@@ -338,6 +342,7 @@ main {
     }
 
     .auto-cycle-label {
+        opacity: 0.8;
         cursor: pointer;
         margin-top: 1rem;
         display: flex;

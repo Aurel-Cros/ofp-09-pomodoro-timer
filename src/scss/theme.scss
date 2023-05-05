@@ -1,9 +1,9 @@
 $main-text-blue : rgb(37, 64, 121);
-$main-text-blue-50 : rgba(38, 65, 122, 0.5);
-$main-text-red: rgb(158, 21, 21);
-$main-text-red-50: hsla(0, 53%, 31%, 0.5);
-$main-text-green : rgb(64, 121, 37);
-$main-text-green-50 : hsla(101, 53%, 31%, 0.5);
+$main-text-blue-50 : rgba(37, 64, 121, 0.5);
+$main-text-red: rgb(223, 81, 81);
+$main-text-red-50: rgba(223, 81, 81, 0.5);
+$main-text-green : rgb(59, 115, 33);
+$main-text-green-50 : rgba(59, 115, 33, 0.5);
 
 .font-sura {
 
@@ -34,6 +34,47 @@ $main-text-green-50 : hsla(101, 53%, 31%, 0.5);
         line-height: 100%;
         font-size-adjust: 0.39;
     }
+}
+
+h1,
+h2,
+h3,
+p,
+button,
+label,
+main #timer>div .pie {
+    transition: border-color 200ms, color 200ms, background-color 200ms;
+}
+
+.settingsWindow {
+    >div:last-of-type {
+        transition: border-color 200ms, color 200ms, background-color 200ms;
+    }
+
+    .slider {
+        input {
+
+            background-color,
+            &::-moz-range-thumb,
+            &::-webkit-slider-thumb {
+                transition: border-color 200ms, color 200ms, background-color 200ms;
+            }
+        }
+    }
+
+    .auto-cycle-label {
+
+        input,
+        >div {
+            transition: border-color 200ms, color 200ms, background-color 200ms;
+        }
+    }
+}
+
+#btn-start,
+.settings-close-btn,
+.btn-settings {
+    transition: filter 200ms;
 }
 
 .theme-red {
@@ -86,7 +127,7 @@ $main-text-green-50 : hsla(101, 53%, 31%, 0.5);
     #btn-start,
     .settings-close-btn,
     .btn-settings {
-        filter: invert(15%) sepia(42%) saturate(4543%) hue-rotate(344deg) brightness(106%) contrast(106%);
+        filter: invert(39%) sepia(15%) saturate(2939%) hue-rotate(314deg) brightness(97%) contrast(102%);
     }
 }
 
@@ -140,7 +181,7 @@ $main-text-green-50 : hsla(101, 53%, 31%, 0.5);
     #btn-start,
     .settings-close-btn,
     .btn-settings {
-        filter: invert(35%) sepia(66%) saturate(503%) hue-rotate(57deg) brightness(96%) contrast(86%);
+        filter: invert(36%) sepia(21%) saturate(1375%) hue-rotate(57deg) brightness(99%) contrast(91%);
     }
 }
 
