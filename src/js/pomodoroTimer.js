@@ -258,13 +258,23 @@ export class PomodoroTimer {
         clearInterval(this.timer);
         this.timer = false;
 
+        if (!this.checkAutocycle()) {
+            this.ctrls.start.classList.remove('pause');
+            this.currentCycle.stage = 0;
+            this.currentCycle.i = 1;
+            this.setDisplayType();
+            this.setTime();
+            this.refreshTime();
+        }
+
         // Reset animation - left side rotates back, then right side rotates back
         DOM.pieL.style = `transform: rotate(0deg);`
         setTimeout(() => {
             DOM.pieL.classList.add('hide');
             DOM.pieR.style = `transform: rotate(0deg);`
         }, 500);
-
+    }
+    checkAutocycle() {
         // Without autocycle on, reset to base state and exit method
         if (!this.settings.autocycle) {
             this.ctrls.start.classList.remove('pause');
@@ -273,8 +283,12 @@ export class PomodoroTimer {
             this.setDisplayType();
             this.setTime();
             this.refreshTime();
-            return;
+            return false;
         }
+        else
+            return true;
+    }
+    autocycle() {
         // If autocycle is enabled, start the next stage
         let replay = true;
 
@@ -322,6 +336,8 @@ export class PomodoroTimer {
             if (this.timeLeft < 0) {
                 this.alert();
                 this.reset();
+                if (this.checkAutocycle())
+                    this.autocycle();
             }
             else {
                 this.refreshTime();

@@ -41,9 +41,8 @@ h2,
 h3,
 p,
 button,
-label,
-main #timer>div .pie {
-    transition: border-color 200ms, color 200ms, background-color 200ms;
+label {
+    transition: border-color 200ms, color 200ms, background-color 200ms, transform 999ms linear;
 }
 
 .settingsWindow {
